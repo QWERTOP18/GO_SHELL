@@ -1,4 +1,4 @@
-package sh_exec
+package executor
 
 import (
 	"fmt"
@@ -13,7 +13,7 @@ func TestExecSimpleCommand(t *testing.T) {
 			words: []string{"ls", "-l", "--color=auto"},
 		},
 		{
-			words: []string{"echo", "Hello🐭"},
+			words: []string{"cat", "non_existent_file"},
 		},
 		{
 			words: []string{"non_existent_command"},
@@ -22,7 +22,7 @@ func TestExecSimpleCommand(t *testing.T) {
 
 	for _, tt := range tests {
 		fmt.Println("\n=== Executing command ----------------")
-		ExecSimpleCommand(tt.words)
+		fmt.Printf("%d\n", ExecSimpleCommand(tt.words))
 	}
 }
 

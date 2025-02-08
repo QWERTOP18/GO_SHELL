@@ -3,8 +3,9 @@ package repl
 import (
 	"fmt"
 	"github.com/chzyer/readline"
-	"shell/sh_exec"
+	"shell/executor"
 	"strings"
+	"os"
 )
 
 const PS1 = "🐠$ "
@@ -28,6 +29,6 @@ func Start() {
 			continue
 		}
 
-		sh_exec.ExecSimpleCommand(args)
+		executor.ExecSimpleCommand(args,os.Stdin,os.Stdout)
 	}
 }

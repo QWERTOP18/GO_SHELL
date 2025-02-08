@@ -1,4 +1,4 @@
-package sh_exec
+package executor
 
 import (
 	"fmt"
