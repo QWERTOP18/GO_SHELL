@@ -12,7 +12,6 @@ import (
 const PS1 = "🐠$ "
 
 func Start() {
-
 	rl, err := readline.New(PS1)
 	if err != nil {
 		panic(err)
@@ -22,15 +21,21 @@ func Start() {
 	for {
 		line, err := rl.Readline()
 		if err != nil {
-			fmt.Println("Error reading input:", err)
+			if err == readline.ErrInterrupt {
+				// Ctrl-C が押されたら次のプロンプトを表示する
+				continue
+			}
+
+			fmt.Println("exit: ", err)
 			return
 		}
-		line = strings.TrimSpace(line)
+
 		args := strings.Fields(line)
 		if len(args) == 0 {
 			continue
 		}
 
+		// コマンドの実行
 		executor.ExecSimpleCommandSync(args, os.Stdin, os.Stdout)
 	}
 }
