@@ -2,15 +2,17 @@ package repl
 
 import (
 	"fmt"
-	"github.com/chzyer/readline"
+	"os"
 	"shell/executor"
 	"strings"
-	"os"
+
+	"github.com/chzyer/readline"
 )
 
 const PS1 = "🐠$ "
 
 func Start() {
+
 	rl, err := readline.New(PS1)
 	if err != nil {
 		panic(err)
@@ -29,6 +31,6 @@ func Start() {
 			continue
 		}
 
-		executor.ExecSimpleCommand(args,os.Stdin,os.Stdout)
+		executor.ExecSimpleCommandSync(args, os.Stdin, os.Stdout)
 	}
 }

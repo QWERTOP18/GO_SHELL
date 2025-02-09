@@ -13,20 +13,20 @@ import (
 // 	cmd.Stdout = os.Stdout
 // 	cmd.Stderr = os.Stderr
 
-// 	err := cmd.Run()
-// 	if err != nil {
-// 		if exitErr, isExitError := err.(*exec.ExitError); isExitError {
-// 			// プロセスの終了コードを取得
-// 			if waitStatus, isWaitStatus := exitErr.Sys().(syscall.WaitStatus); isWaitStatus {
-// 				return waitStatus.ExitStatus()
-// 			}
-// 		}
-// 		fmt.Fprintf(os.Stderr, "Error: %v: %v\n", words[0], "command not found")
-// 		return 127
-// 	}
-// 	return 0
-// }
-func ExecSimpleCommand(words []string,inputFile *os.File, outputFile *os.File) int {
+//		err := cmd.Run()
+//		if err != nil {
+//			if exitErr, isExitError := err.(*exec.ExitError); isExitError {
+//				// プロセスの終了コードを取得
+//				if waitStatus, isWaitStatus := exitErr.Sys().(syscall.WaitStatus); isWaitStatus {
+//					return waitStatus.ExitStatus()
+//				}
+//			}
+//			fmt.Fprintf(os.Stderr, "Error: %v: %v\n", words[0], "command not found")
+//			return 127
+//		}
+//		return 0
+//	}
+func ExecSimpleCommandSync(words []string, inputFile *os.File, outputFile *os.File) int {
 	cmd := exec.Command(words[0], words[1:]...)
 	cmd.Stdin = inputFile
 	cmd.Stdout = outputFile
@@ -45,16 +45,11 @@ func ExecSimpleCommand(words []string,inputFile *os.File, outputFile *os.File) i
 	}
 	return 0
 }
-/* 
+
+/*
 signalを受け取るためにはSimple Commandも非同期的に処理しないといけない
 builtinの処理も
 */
-
-
-
-
-
-
 
 func ExecSimpleCommandRedirection(words []string, inputFile string, outputFile string) error {
 	cmd := exec.Command(words[0], words[1:]...)

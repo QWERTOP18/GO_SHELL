@@ -1,3 +1,0 @@
-func TestExecSimpleCommand(t *testing.T) {
-func TestExecSimpleCommandRedirection(t *testing.T) {
-	words := []string{"grep", "func"}
